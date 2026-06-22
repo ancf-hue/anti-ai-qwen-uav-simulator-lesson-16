@@ -1,0 +1,29 @@
+# robots.txt для Anti-AI Qwen UAV Simulator Lesson 16
+# https://anti-ai-qwen-uav-simulator-lesson-1-delta.vercel.app/
+
+# Разрешить всем поисковым роботам индексировать сайт
+User-agent: *
+Allow: /
+
+# Указать путь к карте сайта
+Sitemap: https://anti-ai-qwen-uav-simulator-lesson-1-delta.vercel.app/sitemap.xml
+
+# Запретить индексацию служебных файлов (опционально)
+Disallow: /favicon.ico
+Disallow: /*.mp3$
+Disallow: /*.jpg$
+
+# Правила для Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Правила для Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# Правила для Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
