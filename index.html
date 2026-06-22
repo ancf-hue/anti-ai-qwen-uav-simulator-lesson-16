@@ -3,53 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="preload" as="image" href="uav-operator.jpg">
-<link rel="preload" as="audio" href="agronom-theme.mp3">
-<title>Урок 16: Агроном — Точное земледелие | Qwen</title>
+<title>Урок 16: Агроном — Точное земледелие</title>
 <style>
 *{ box-sizing: border-box; margin: 0; padding: 0;}
 body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background:#0a1a0a; color:#ccffcc;}
 
-#loader{ position: fixed; inset: 0; background: radial-gradient(ellipse at center,#1a2a1a 0%,#0a1a0a 50%,#050f05 100%); display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.5s ease;}
-#loader.hidden{ opacity: 0; pointer-events: none;}
-.loader-content{ text-align: center; color: #ccffcc; font-family: 'Segoe UI', monospace; padding: 20px;}
-.loader-spinner{ width: 70px; height: 70px; border: 4px solid rgba(102, 204, 102, 0.2); border-top: 4px solid #66cc66; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;}
-@keyframes spin{ 0%{ transform: rotate(0deg);} 100%{ transform: rotate(360deg);}}
-.loader-title{ font-size: 22px; font-weight: 900; color: #88dd88; margin-bottom: 15px; letter-spacing: 2px; text-shadow: 0 0 15px rgba(136, 221, 136, 0.6);}
-.loader-progress{ width: 320px; max-width: 90vw; height: 10px; background: rgba(102, 204, 102, 0.2); border-radius: 10px; overflow: hidden; margin: 15px auto; border: 1px solid rgba(102, 204, 102, 0.4);}
-.loader-bar{ height: 100%; background: linear-gradient(90deg, #66cc66, #88dd88); transition: width 0.3s ease; box-shadow: 0 0 10px #66cc66; width: 0%;}
-.loader-status{ font-size: 12px; margin-top: 10px; color: #88dd88; min-height: 16px;}
-
-.logo-header{ position: fixed; top: 20px; left: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-radius: 50px; border: 2px solid transparent; background-clip: padding-box; box-shadow: 0 8px 32px rgba(100, 200, 100, 0.4), 0 0 40px rgba(50, 150, 50, 0.3);}
+.logo-header{ position: fixed; top: 20px; left: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-radius: 50px; border: 2px solid transparent; background-clip: padding-box; box-shadow: 0 8px 32px rgba(100, 200, 100, 0.4);}
 .logo-header::before{ content:''; position: absolute; inset:-2px; background: linear-gradient(135deg,#66cc66,#339933,#88dd88, #66cc66); border-radius: 50px; z-index:-1; animation: gradientShift 5s ease infinite; background-size: 300% 300%;}
 @keyframes gradientShift{ 0%, 100%{ background-position: 0% 50%;} 50%{ background-position: 100% 50%;}}
-.logo-header img{ width: 40px; height: 40px; border-radius: 10px; animation: logoPulse 2s ease-in-out infinite;}
-@keyframes logoPulse{ 0%, 100%{ transform: scale(1); filter: drop-shadow(0 0 8px #66cc66);} 50%{ transform: scale(1.05); filter: drop-shadow(0 0 15px #88dd88) drop-shadow(0 0 25px #66cc66);}}
+.logo-header img{ width: 40px; height: 40px; border-radius: 10px;}
 .logo-text{ display: flex; flex-direction: column; gap: 2px;}
 .logo-main{ font-size: 13px; font-weight: 900; background: linear-gradient(135deg,#ffffff,#66cc66,#88dd88); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; white-space: nowrap;}
-.logo-sub{ font-size: 11px; color:#88dd88; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px rgba(136, 221, 136, 0.8);}
+.logo-sub{ font-size: 11px; color:#88dd88; font-weight: bold; letter-spacing: 2px;}
 
 #intro-page{ position: fixed; inset: 0; background: radial-gradient(ellipse at center,#1a2a1a 0%,#0a1a0a 50%,#050f05 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; transition: opacity 0.8s ease; overflow-y: auto; padding: 80px 20px 20px;}
 #intro-page.hidden{ opacity: 0; pointer-events: none;}
-.intro-image{ width: 90%; max-width: 900px; border-radius: 20px; box-shadow: 0 0 60px rgba(100, 200, 100, 0.5); border: 3px solid rgba(100, 200, 100, 0.6); animation: imageGlow 3s ease-in-out infinite;}
-@keyframes imageGlow{ 0%, 100%{ box-shadow: 0 0 40px rgba(100, 200, 100, 0.4);} 50%{ box-shadow: 0 0 60px rgba(150, 220, 150, 0.6);}}
+.intro-image{ width: 90%; max-width: 900px; border-radius: 20px; box-shadow: 0 0 60px rgba(100, 200, 100, 0.5); border: 3px solid rgba(100, 200, 100, 0.6);}
 .intro-title{ margin-top: 30px; font-size: 42px; font-weight: 900; background: linear-gradient(135deg,#ffffff,#66cc66,#88dd88); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-align: center; letter-spacing: 3px;}
-.intro-subtitle{ margin-top: 10px; font-size: 20px; color:#88dd88; text-align: center; letter-spacing: 5px; text-shadow: 0 0 20px rgba(136, 221, 136, 0.8);}
+.intro-subtitle{ margin-top: 10px; font-size: 20px; color:#88dd88; text-align: center; letter-spacing: 5px;}
 .intro-desc{ margin-top: 20px; max-width: 600px; text-align: center; color:#ccffcc; font-size: 14px; line-height: 1.6; padding: 0 20px;}
 
-.difficulty-selector{ margin-top: 40px; display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; perspective: 1000px;}
-.difficulty-btn{ position: relative; padding: 22px 45px; font-size: 18px; font-weight: 900; border: none; border-radius: 18px; color: white; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; min-width: 220px; font-family: 'Orbitron', 'Segoe UI', monospace; transform-style: preserve-3d; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);}
-.difficulty-btn::before{ content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; border-radius: 18px 18px 50% 50% / 18px 18px 100% 100%; background: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%); pointer-events: none;}
-.difficulty-btn::after{ content: ''; position: absolute; inset: 2px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); border-top-color: rgba(255,255,255,0.4); border-bottom-color: rgba(255,255,255,0.1); pointer-events: none;}
-.difficulty-btn > *{ position: relative; z-index: 2; }
-.difficulty-btn.easy{ background: linear-gradient(145deg, rgba(72, 187, 120, 0.85), rgba(56, 161, 105, 0.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -3px 0 rgba(0,0,0,0.2), inset 0 0 30px rgba(72, 187, 120, 0.3), 0 8px 0 #1a5f3a, 0 12px 20px rgba(0,0,0,0.4), 0 0 40px rgba(72, 187, 120, 0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(72, 187, 120, 0.8);}
-.difficulty-btn.medium{ background: linear-gradient(145deg, rgba(236, 201, 75, 0.85), rgba(214, 158, 46, 0.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -3px 0 rgba(0,0,0,0.2), inset 0 0 30px rgba(236, 201, 75, 0.3), 0 8px 0 #7c5a1a, 0 12px 20px rgba(0,0,0,0.4), 0 0 40px rgba(236, 201, 75, 0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(236, 201, 75, 0.8);}
-.difficulty-btn.hard{ background: linear-gradient(145deg, rgba(229, 62, 62, 0.85), rgba(197, 48, 48, 0.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -3px 0 rgba(0,0,0,0.25), inset 0 0 30px rgba(229, 62, 62, 0.3), 0 8px 0 #5a1a1a, 0 12px 20px rgba(0,0,0,0.4), 0 0 40px rgba(229, 62, 62, 0.4); text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(229, 62, 62, 0.8);}
-.difficulty-btn:hover{ transform: translateY(-4px) rotateX(-5deg);}
-.difficulty-btn:active{ transform: translateY(4px) rotateX(0deg);}
-@keyframes glassGlow{ 0%, 100%{ filter: brightness(1) saturate(1); } 50%{ filter: brightness(1.1) saturate(1.2); }}
-.difficulty-btn{ animation: glassGlow 3s ease-in-out infinite; }
+.difficulty-selector{ margin-top: 40px; display: flex; gap: 25px; flex-wrap: wrap; justify-content: center;}
+.difficulty-btn{ position: relative; padding: 22px 45px; font-size: 18px; font-weight: 900; border: none; border-radius: 18px; color: white; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; min-width: 220px; font-family: 'Orbitron', 'Segoe UI', monospace; transition: all 0.3s;}
+.difficulty-btn.easy{ background: linear-gradient(145deg, rgba(72, 187, 120, 0.85), rgba(56, 161, 105, 0.9)); box-shadow: 0 8px 0 #1a5f3a, 0 12px 20px rgba(0,0,0,0.4);}
+.difficulty-btn.medium{ background: linear-gradient(145deg, rgba(236, 201, 75, 0.85), rgba(214, 158, 46, 0.9)); box-shadow: 0 8px 0 #7c5a1a, 0 12px 20px rgba(0,0,0,0.4);}
+.difficulty-btn.hard{ background: linear-gradient(145deg, rgba(229, 62, 62, 0.85), rgba(197, 48, 48, 0.9)); box-shadow: 0 8px 0 #5a1a1a, 0 12px 20px rgba(0,0,0,0.4);}
+.difficulty-btn:hover{ transform: translateY(-4px);}
+.difficulty-btn:active{ transform: translateY(4px);}
 
 .difficulty-info{ margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.5); border-radius: 20px; max-width: 600px; text-align: center; border: 1px solid rgba(100,200,100,0.3);}
 .difficulty-info h3{ color: #66cc66; margin-bottom: 15px; font-size: 20px;}
@@ -78,14 +58,11 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
 .lesson-badge{ position: fixed; bottom: 20px; right: 20px; background:#000000aa; padding: 5px 12px; border-radius: 20px; font-size: 11px; color:#88dd88; pointer-events: none; font-family: monospace; z-index: 100;}
 
-#resetBtn, #exitMenuBtn{ position: fixed; bottom: 130px; z-index: 9999; padding: 14px 35px; border-radius: 16px; border: none; font-weight: 900; font-family: 'Orbitron', 'Segoe UI', monospace; cursor: pointer; font-size: 14px; color: white; letter-spacing: 2px; text-transform: uppercase; backdrop-filter: blur(10px); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);}
+#resetBtn, #exitMenuBtn{ position: fixed; bottom: 130px; z-index: 9999; padding: 14px 35px; border-radius: 16px; border: none; font-weight: 900; font-family: 'Orbitron', 'Segoe UI', monospace; cursor: pointer; font-size: 14px; color: white; letter-spacing: 2px; text-transform: uppercase; backdrop-filter: blur(10px); transition: all 0.25s;}
 #resetBtn{ left: calc(50% - 180px); background: linear-gradient(145deg, rgba(102, 204, 102, 0.85), rgba(51, 153, 51, 0.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -3px 0 rgba(0,0,0,0.2), inset 0 0 30px rgba(102, 204, 102, 0.3), 0 6px 0 rgba(34, 102, 34, 0.8), 0 10px 20px rgba(0,0,0,0.4), 0 0 40px rgba(102, 204, 102, 0.5); text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(102, 204, 102, 0.8);}
 #exitMenuBtn{ left: calc(50% + 20px); background: linear-gradient(145deg, rgba(204, 51, 51, 0.85), rgba(136, 34, 34, 0.9)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -3px 0 rgba(0,0,0,0.25), inset 0 0 30px rgba(204, 51, 51, 0.3), 0 6px 0 rgba(85, 17, 17, 0.8), 0 10px 20px rgba(0,0,0,0.4), 0 0 40px rgba(204, 51, 51, 0.5); text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(204, 51, 51, 0.8);}
 #resetBtn:hover, #exitMenuBtn:hover{ transform: translateY(-3px);}
 #resetBtn:active, #exitMenuBtn:active{ transform: translateY(3px);}
-
-#muteBtn{ position: fixed; bottom: 20px; right: 140px; z-index: 100; background: rgba(0,0,0,0.7); border: 2px solid #66cc66; color: #88dd88; padding: 8px 14px; border-radius: 15px; cursor: pointer; font-family: monospace; font-size: 13px; backdrop-filter: blur(5px); transition: all 0.2s;}
-#muteBtn:hover{ background: rgba(102, 204, 102, 0.3); transform: scale(1.05);}
 
 #controls-hint{ position: fixed; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 8px 14px; border-radius: 15px; font-size: 11px; pointer-events: none; font-family: monospace; color:#ccffcc; z-index: 100; backdrop-filter: blur(5px); line-height: 1.6;}
 
@@ -120,22 +97,10 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
  #resetBtn{ left: calc(50% - 120px);}
  #exitMenuBtn{ left: calc(50% + 10px);}
  #field-panel, #drone-panel{ display: none;}
- #muteBtn{ bottom: 15px; right: 15px; padding: 6px 10px; font-size: 11px;}
 }
 </style>
 </head>
 <body>
-
-<div id="loader">
-  <div class="loader-content">
-    <div class="loader-spinner"></div>
-    <div class="loader-title">🌾 АГРОНОМ-СИМУЛЯТОР</div>
-    <div class="loader-progress">
-      <div id="loader-bar" class="loader-bar"></div>
-    </div>
-    <div id="loader-status" class="loader-status">Инициализация...</div>
-  </div>
-</div>
 
 <div class="logo-header">
   <img id="logoImg" src="favicon.ico" alt="АГРОНОМ">
@@ -212,8 +177,6 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
     💧 Обработайте все зоны
   </div>
 
-  <button id="muteBtn">🔊 Выкл. звук</button>
-
   <div class="lesson-badge">🌾 ЗАДАНИЕ: Обработать проблемные зоны</div>
 
   <button id="resetBtn"><span>🔄 Перезапустить</span></button>
@@ -247,14 +210,13 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
   </div>
 </div>
 
-<audio id="bg-music" loop preload="auto">
+<audio id="bg-music" loop>
   <source src="agronom-theme.mp3" type="audio/mpeg">
 </audio>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 console.log('🚁 Агроном-симулятор загружен');
-console.log('🎮 Управление: WASD + Q/E');
-console.log('⚠️ Правила: Столкновение = провал!');
 
 const DIFFICULTY_CONFIG = {
   easy: { zoneCount: 3, obstacleCount: 5, MISSION_TIME: 120, liquidCapacity: 150, name: 'Лёгкий' },
@@ -263,12 +225,11 @@ const DIFFICULTY_CONFIG = {
 };
 
 let currentDifficulty = 'easy';
-
 let state = {
   animationId: null, gameCompleted: false, timeLeft: 120, timerInterval: null, isRestarting: false,
   zonesTreated: 0, liquidLevel: 100, score: 0,
-  dronePos: null,
-  droneVel: null,
+  dronePos: new THREE.Vector3(0, 10, 0),
+  droneVel: new THREE.Vector3(0, 0, 0),
   propAngle: 0, batteryLevel: 100, signalLevel: 100
 };
 
@@ -278,122 +239,6 @@ let propellers = [];
 let audioCtx = null, notifTimeout = null, lastNotifText = "";
 let keys = {};
 let liquidWarningShown = false;
-let listenersSetup = false;
-
-const resourcesLoaded = { image: false, audio: false, threejs: false };
-
-function updateLoaderProgress(resource, success) {
-  resourcesLoaded[resource] = true;
-  const loaded = Object.values(resourcesLoaded).filter(v => v).length;
-  const total = Object.keys(resourcesLoaded).length;
-  const progress = (loaded / total) * 100;
-  
-  const bar = document.getElementById('loader-bar');
-  const status = document.getElementById('loader-status');
-  
-  if (bar) bar.style.width = progress + '%';
-  if (status) {
-    const messages = {
-      image: success ? '✅ Изображение загружено' : '⚠️ Изображение: fallback',
-      audio: success ? '✅ Аудио загружено' : '⚠️ Аудио: синтез',
-      threejs: success ? '✅ Three.js загружен' : '❌ Three.js не загружен'
-    };
-    status.innerText = messages[resource] || 'Загрузка...';
-  }
-  
-  if (loaded === total) {
-    setTimeout(() => {
-      const loader = document.getElementById('loader');
-      if (loader) loader.classList.add('hidden');
-      setTimeout(() => { if (loader) loader.style.display = 'none'; }, 600);
-    }, 400);
-  }
-}
-
-function loadThreeJS() {
-  return new Promise((resolve) => {
-    if (typeof THREE !== 'undefined') {
-      resolve(true);
-      return;
-    }
-    
-    console.log('📦 Загрузка Three.js с основного CDN...');
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-    script.onload = () => {
-      console.log('✅ Three.js загружен с cdnjs');
-      resolve(true);
-    };
-    script.onerror = () => {
-      console.warn('⚠️ Основной CDN недоступен, пробуем fallback...');
-      const fallback = document.createElement('script');
-      fallback.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
-      fallback.onload = () => {
-        console.log('✅ Three.js загружен с jsdelivr (fallback)');
-        resolve(true);
-      };
-      fallback.onerror = () => {
-        console.error('❌ Не удалось загрузить Three.js ни с одного CDN');
-        resolve(false);
-      };
-      document.head.appendChild(fallback);
-    };
-    document.head.appendChild(script);
-  });
-}
-
-async function initResourceLoading() {
-  console.log('🔍 Проверка ресурсов...');
-  
-  const threeLoaded = await loadThreeJS();
-  if (threeLoaded) {
-    state.dronePos = new THREE.Vector3(0, 10, 0);
-    state.droneVel = new THREE.Vector3(0, 0, 0);
-    updateLoaderProgress('threejs', true);
-  } else {
-    console.error('❌ Three.js не загружен!');
-    updateLoaderProgress('threejs', false);
-    return;
-  }
-  
-  const introImg = document.querySelector('.intro-image');
-  if (introImg) {
-    if (introImg.complete && introImg.naturalWidth > 0) {
-      updateLoaderProgress('image', true);
-    } else {
-      introImg.addEventListener('load', () => updateLoaderProgress('image', true), { once: true });
-      introImg.addEventListener('error', () => {
-        console.warn('⚠️ Изображение не загружено, используем fallback');
-        introImg.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-          '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">' +
-          '<defs><radialGradient id="g" cx="50%" cy="50%" r="60%">' +
-          '<stop offset="0%" stop-color="#2d5a2d"/><stop offset="100%" stop-color="#0a1a0a"/>' +
-          '</radialGradient></defs>' +
-          '<rect fill="url(#g)" width="900" height="500"/>' +
-          '<text x="50%" y="45%" font-size="80" text-anchor="middle" fill="#66cc66">🌾🚁</text>' +
-          '<text x="50%" y="65%" font-size="36" font-weight="bold" text-anchor="middle" fill="#88dd88" font-family="monospace">ОПЕРАТОР АГРОНОМ</text>' +
-          '<text x="50%" y="80%" font-size="18" text-anchor="middle" fill="#ccffcc" font-family="monospace">Точное земледелие с БПЛА</text>' +
-          '</svg>'
-        );
-        updateLoaderProgress('image', false);
-      }, { once: true });
-    }
-  }
-  
-  const music = document.getElementById('bg-music');
-  if (music) {
-    if (music.readyState >= 2) {
-      updateLoaderProgress('audio', true);
-    } else {
-      music.addEventListener('canplaythrough', () => updateLoaderProgress('audio', true), { once: true });
-      music.addEventListener('error', () => {
-        console.warn('⚠️ Аудио не загружено, будет синтезированная музыка');
-        updateLoaderProgress('audio', false);
-      }, { once: true });
-      music.load();
-    }
-  }
-}
 
 function ensureAudio(){
   if(!audioCtx){ try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return false; } }
@@ -425,33 +270,9 @@ const SFX = {
   warning: () => { playSound(400, 0.15, 'square', 0.1); }
 };
 
-let ambientInterval = null;
-function startAmbientMusic() {
-  if (!ensureAudio()) return;
-  stopAmbientMusic();
-  const notes = [261, 329, 392, 523, 392, 329];
-  let index = 0;
-  ambientInterval = setInterval(() => {
-    if (document.getElementById('bg-music').muted) return;
-    const now = audioCtx.currentTime;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.value = notes[index % notes.length];
-    gain.gain.setValueAtTime(0.02, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    osc.start(now); osc.stop(now + 0.8);
-    index++;
-  }, 600);
-}
-function stopAmbientMusic() {
-  if (ambientInterval) { clearInterval(ambientInterval); ambientInterval = null; }
-}
-
 function showNotification(text, type = ''){
   const n = document.getElementById('notification');
-  if(!n) return;
+  if(!n || lastNotifText === text) return;
   lastNotifText = text;
   n.innerText = text;
   n.className = 'show ' + type;
@@ -460,23 +281,13 @@ function showNotification(text, type = ''){
 }
 
 async function startSimulator(difficulty){
-  if (typeof THREE === 'undefined') {
-    showNotification('❌ 3D-движок не загружен! Проверьте интернет.', 'hit');
-    console.error('❌ Three.js не загружен!');
-    return;
-  }
-  
   currentDifficulty = difficulty;
   const config = DIFFICULTY_CONFIG[difficulty];
   state.timeLeft = config.MISSION_TIME;
   state.liquidLevel = 100;
   ensureAudio();
   const music = document.getElementById('bg-music');
-  if (music && music.readyState >= 2) {
-    if(music.paused){ music.volume = 0.4; music.play().catch(() => {}); }
-  } else {
-    startAmbientMusic();
-  }
+  if(music.paused){ music.volume = 0.4; music.play().catch(e => {}); }
   
   document.getElementById('intro-page').classList.add('hidden');
   setTimeout(() => {
@@ -490,13 +301,12 @@ async function startSimulator(difficulty){
 function exitToMenu(){
   if(state.animationId){ cancelAnimationFrame(state.animationId); state.animationId = null; }
   if(state.timerInterval){ clearInterval(state.timerInterval); state.timerInterval = null; }
-  stopAmbientMusic();
   document.getElementById('victoryModal').classList.remove('show');
   document.getElementById('defeatModal').classList.remove('show');
   document.getElementById('simulator-page').classList.remove('active');
   setTimeout(() => { document.getElementById('intro-page').classList.remove('hidden'); }, 300);
   const music = document.getElementById('bg-music');
-  if (music) { music.pause(); music.currentTime = 0; }
+  music.pause(); music.currentTime = 0;
 }
 
 function showVictoryModal(){
@@ -661,24 +471,9 @@ function createDetailedDrone(){
 function initSimulator(){
   console.log('🌾 Инициализация агро-симулятора...');
   
-  if (typeof THREE === 'undefined') {
-    console.error('❌ Three.js не загружен!');
-    showNotification('❌ Ошибка загрузки 3D-библиотеки!', 'hit');
-    return;
-  }
-  
-  state.dronePos = new THREE.Vector3(0, 10, 0);
-  state.droneVel = new THREE.Vector3(0, 0, 0);
-  
-  if (renderer) {
-    if (renderer.domElement && renderer.domElement.parentNode) {
-      renderer.domElement.parentNode.removeChild(renderer.domElement);
-    }
-    renderer.dispose();
-    renderer = null;
-  }
-  
   state.gameCompleted = false;
+  state.dronePos.set(0, 10, 0);
+  state.droneVel.set(0, 0, 0);
   state.propAngle = 0;
   state.zonesTreated = 0;
   state.score = 0;
@@ -800,6 +595,7 @@ function initSimulator(){
   droneGroup.position.copy(state.dronePos);
   scene.add(droneGroup);
   
+  setupEventListeners();
   animate();
   
   console.log(`✅ Агро-симулятор запущен. Уровень: ${config.name}`);
@@ -837,10 +633,6 @@ function updateDrone(){
   if(keys['q'] || keys['shift']) state.droneVel.y += speed * 0.5;
   if(keys['e'] || keys['control']) state.droneVel.y -= speed * 0.5;
   
-  // ✅ ИСПРАВЛЕНИЕ 3: Ограничение максимальной скорости
-  const MAX_SPEED = 1.5;
-  state.droneVel.clampLength(0, MAX_SPEED);
-  
   state.droneVel.multiplyScalar(0.95);
   state.dronePos.add(state.droneVel);
   
@@ -864,13 +656,15 @@ function updateDrone(){
     const obs = obstacles[i];
     const dist = state.dronePos.distanceTo(obs.pos);
     if(dist < obs.radius + 1){
+      SFX.crash();
       showNotification("💥 СТОЛКНОВЕНИЕ! Миссия провалена!", 'hit');
       showDefeatModal("💥 Дрон столкнулся с препятствием!");
       return;
     }
   }
   
-  if(state.dronePos.y <= 2.1){
+  if(state.dronePos.y < 2.5){
+    SFX.crash();
     showNotification("💥 Дрон разбился о землю! Миссия провалена!", 'hit');
     showDefeatModal("💥 Дрон упал на землю!");
     return;
@@ -916,7 +710,7 @@ function updateDrone(){
   document.getElementById('drone-battery').innerText = Math.round(state.batteryLevel);
   document.getElementById('drone-signal').innerText = Math.round(state.signalLevel);
   
-  state.batteryLevel = Math.max(0, state.batteryLevel - 0.005);
+  state.batteryLevel = Math.max(0, state.batteryLevel - 0.02);
   if(state.batteryLevel < 20 && state.batteryLevel > 19.9){
     SFX.warning();
   }
@@ -959,52 +753,19 @@ function fullGameRestart(){
   
   console.log('🔄 Перезапуск миссии...');
   
-  if(state.timerInterval){ 
-    clearInterval(state.timerInterval); 
-    state.timerInterval = null; 
-  }
-  
-  if(state.animationId){ 
-    cancelAnimationFrame(state.animationId); 
-    state.animationId = null; 
-  }
-  
-  // ✅ ИСПРАВЛЕНИЕ 2: Рекурсивная очистка дрона (предотвращение утечки памяти)
-  if (droneGroup) {
-    droneGroup.traverse(child => {
-      if (child.geometry) child.geometry.dispose();
-      if (child.material) {
-        if (Array.isArray(child.material)) {
-          child.material.forEach(m => m.dispose());
+  if(scene){
+    scene.traverse((object) => {
+      if(object.geometry) object.geometry.dispose();
+      if(object.material) {
+        if(Array.isArray(object.material)) {
+          object.material.forEach(m => m.dispose());
         } else {
-          child.material.dispose();
+          object.material.dispose();
         }
       }
     });
-    scene.remove(droneGroup);
-    droneGroup = null;
-  }
-  
-  if (renderer) {
-    if (renderer.domElement && renderer.domElement.parentNode) {
-      renderer.domElement.parentNode.removeChild(renderer.domElement);
-    }
-    renderer.dispose();
-    renderer = null;
-  }
-  
-  if (scene) {
-    while (scene.children.length > 0) {
-      const child = scene.children[0];
-      if (child.geometry) child.geometry.dispose();
-      if (child.material) {
-        if (Array.isArray(child.material)) {
-          child.material.forEach(m => m.dispose());
-        } else {
-          child.material.dispose();
-        }
-      }
-      scene.remove(child);
+    while(scene.children.length > 0) {
+      scene.remove(scene.children[0]);
     }
     problemZones = [];
     obstacles = [];
@@ -1019,9 +780,6 @@ function fullGameRestart(){
 }
 
 function setupEventListeners(){
-  if (listenersSetup) return;
-  listenersSetup = true;
-  
   window.addEventListener('resize', handleResize);
   
   window.addEventListener('keydown', (e) => { 
@@ -1031,7 +789,9 @@ function setupEventListeners(){
   
   window.addEventListener('keyup', (e) => { keys[e.key.toLowerCase()] = false; });
   
-  window.addEventListener('blur', () => { keys = {}; });
+  window.addEventListener('blur', () => {
+    keys = {};
+  });
   
   document.getElementById('resetBtn').addEventListener('click', () => {
     if(state.timerInterval) clearInterval(state.timerInterval);
@@ -1048,45 +808,25 @@ function setupEventListeners(){
     fullGameRestart();
   });
   document.getElementById('defeatExitBtn').addEventListener('click', exitToMenu);
-  
-  // ✅ ИСПРАВЛЕНИЕ 1: Корректное отображение состояния звука
-  const muteBtn = document.getElementById('muteBtn');
-  if (muteBtn) {
-    muteBtn.addEventListener('click', () => {
-      const music = document.getElementById('bg-music');
-      if (music) {
-        music.muted = !music.muted;
-        muteBtn.innerText = music.muted ? '🔇 Вкл. звук' : '🔊 Выкл. звук';
-      }
-    });
-  }
 }
 
 window.addEventListener('beforeunload', () => {
   if(state.animationId) cancelAnimationFrame(state.animationId);
   if(state.timerInterval) clearInterval(state.timerInterval);
-  stopAmbientMusic();
   if(audioCtx && audioCtx.state !== 'closed'){ try{ audioCtx.close(); } catch(e){} }
   if(scene){
-    while(scene.children.length > 0) {
-      const child = scene.children[0];
-      if(child.geometry) child.geometry.dispose();
-      if(child.material) {
-        if(Array.isArray(child.material)) {
-          child.material.forEach(m => m.dispose());
+    scene.traverse((object) => {
+      if(object.geometry) object.geometry.dispose();
+      if(object.material) {
+        if(Array.isArray(object.material)) {
+          object.material.forEach(m => m.dispose());
         } else {
-          child.material.dispose();
+          object.material.dispose();
         }
       }
-      scene.remove(child);
-    }
+    });
   }
   if(renderer) renderer.dispose();
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-  initResourceLoading();
-  setupEventListeners();
 });
 </script>
 </body>
